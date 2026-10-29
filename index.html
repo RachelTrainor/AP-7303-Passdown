@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AP Pass-Down System | Dashboard</title>
+
+    <meta name="description"
+          content="Asset Protection shift pass-down and task management dashboard.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- APPLICATION LAYOUT -->
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <div class="logo-icon">AP</div>
+
+                <div class="logo-text">
+                    <h2>Asset Protection</h2>
+                    <span>Pass-Down System</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="nav-section-label">
+                    WORKSPACE
+                </div>
+
+                <a href="#dashboard"
+                   class="nav-item active"
+                   data-page="dashboard">
+                    <span class="nav-icon">▦</span>
+                    Dashboard
+                </a>
+
+                <a href="#passdowns"
+                   class="nav-item"
+                   data-page="passdowns">
+                    <span class="nav-icon">▤</span>
+                    Pass-Down Log
+                </a>
+
+                <a href="#tasks"
+                   class="nav-item"
+                   data-page="tasks">
+                    <span class="nav-icon">☑</span>
+                    Task Management
+                </a>
+
+                <a href="#history"
+                   class="nav-item"
+                   data-page="history">
+                    <span class="nav-icon">◷</span>
+                    Shift History
+                </a>
+
+                <div class="nav-section-label">
+                    POSTS
+                </div>
+
+                <a href="#core-rover"
+                   class="nav-item post-link"
+                   data-post="core-rover">
+                    <span class="post-indicator"></span>
+                    CORE Rover
+                </a>
+
+                <a href="#inbound"
+                   class="nav-item post-link"
+                   data-post="inbound">
+                    <span class="post-indicator"></span>
+                    Inbound
+                </a>
+
+                <a href="#outbound"
+                   class="nav-item post-link"
+                   data-post="outbound">
+                    <span class="post-indicator"></span>
+                    Outbound
+                </a>
+
+                <a href="#ap-office"
+                   class="nav-item post-link"
+                   data-post="ap-office">
+                    <span class="post-indicator"></span>
+                    AP Office
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span id="connection-status">
+                        Prototype Mode
+                    </span>
+                </div>
+
+                <p>AP Pass-Down System</p>
+                <small>Version 1.0</small>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content" id="dashboard">
+
+            <!-- TOP HEADER -->
+            <header class="top-header">
+
+                <div class="header-left">
+                    <button
+                        id="mobile-menu-button"
+                        class="mobile-menu-button"
+                        type="button"
+                        aria-label="Toggle navigation">
+                        ☰
+                    </button>
+
+                    <div>
+                        <h1>Shift Dashboard</h1>
+                        <p>
+                            Asset Protection Operations
+                        </p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+
+                    <div class="current-date">
+                        <span id="current-date">
+                            Loading date...
+                        </span>
+                    </div>
+
+                    <div class="shift-selector">
+
+                        <label for="current-shift">
+                            Your Shift
+                        </label>
+
+                        <select id="current-shift">
+                            <option value="">Select Shift</option>
+                            <option value="S1">S1</option>
+                            <option value="S2">S2</option>
+                            <option value="S3">S3</option>
+                            <option value="S4">S4</option>
+                            <option value="S5">S5</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD CONTENT -->
+            <div class="dashboard-content">
+
+                <!-- WELCOME SECTION -->
+                <section class="welcome-section">
+
+                    <div class="welcome-text">
+
+                        <div class="section-eyebrow">
+                            OPERATIONS OVERVIEW
+                        </div>
+
+                        <h2>Shift Pass-Down Dashboard</h2>
+
+                        <p>
+                            Review previous shift activity,
+                            acknowledge pass-downs, and
+                            manage outstanding tasks.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        id="create-passdown-btn"
+                        type="button">
+                        + Create Pass-Down
+                    </button>
+
+                </section>
+
+
+                <!-- STATISTICS -->
+                <section class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span>Active Posts</span>
+                            <span class="stat-icon">▦</span>
+                        </div>
+
+                        <div class="stat-value">
+                            4
+                        </div>
+
+                        <div class="stat-description">
+                            CORE Rover, Inbound,
+                            Outbound, AP Office
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span>Pending Acknowledgments</span>
+                            <span class="stat-icon">✍</span>
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="pending-acknowledgments">
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Awaiting associate or
+                            manager sign-off
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span>Outstanding Tasks</span>
+                            <span class="stat-icon">☑</span>
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="outstanding-task-count">
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Tasks requiring follow-up
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span>Recent Pass-Downs</span>
+                            <span class="stat-icon">◷</span>
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="recent-passdown-count">
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Submitted within
+                            the last seven days
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CURRENT PASS-DOWNS -->
+                <section
+                    class="dashboard-section"
+                    id="passdowns">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2>Current Pass-Downs</h2>
+
+                            <p>
+                                Review and acknowledge
+                                the previous shift's
+                                pass-down for each post.
+                            </p>
+                        </div>
+
+                        <div class="section-actions">
+
+                            <select id="post-filter">
+                                <option value="all">
+                                    All Posts
+                                </option>
+                                <option value="core-rover">
+                                    CORE Rover
+                                </option>
+                                <option value="inbound">
+                                    Inbound
+                                </option>
+                                <option value="outbound">
+                                    Outbound
+                                </option>
+                                <option value="ap-office">
+                                    AP Office
+                                </option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- POST CARDS -->
+                    <div
+                        class="post-grid"
+                        id="current-passdown-grid">
+
+                        <!-- CORE ROVER -->
+                        <article
+                            class="post-card"
+                            data-post="core-rover">
+
+                            <div class="post-card-header">
+
+                                <div class="post-title-group">
+                                    <div class="post-avatar">
+                                        CR
+                                    </div>
+
+                                    <div>
+                                        <h3>CORE Rover</h3>
+                                        <span>
+                                            Current Pass-Down
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <span
+                                    class="badge badge-neutral"
+                                    id="core-rover-status">
+                                    No Entry
+                                </span>
+
+                            </div>
+
+                            <div
+                                class="post-card-body"
+                                id="core-rover-preview">
+
+                                <p class="empty-state">
+                                    No pass-down available.
+                                </p>
+
+                            </div>
+
+                            <div class="post-card-footer">
+
+                                <button
+                                    class="btn btn-secondary view-passdown-btn"
+                                    type="button"
+                                    data-post="core-rover">
+                                    View Pass-Down
+                                </button>
+
+                                <button
+                                    class="btn btn-primary acknowledge-btn"
+                                    type="button"
+                                    data-post="core-rover">
+                                    Sign Off
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- INBOUND -->
+                        <article
+                            class="post-card"
+                            data-post="inbound">
+
+                            <div class="post-card-header">
+
+                                <div class="post-title-group">
+                                    <div class="post-avatar">
+                                        IN
+                                    </div>
+
+                                    <div>
+                                        <h3>Inbound</h3>
+                                        <span>
+                                            Current Pass-Down
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <span
+                                    class="badge badge-neutral"
+                                    id="inbound-status">
+                                    No Entry
+                                </span>
+
+                            </div>
+
+                            <div
+                                class="post-card-body"
+                                id="inbound-preview">
+
+                                <p class="empty-state">
+                                    No pass-down available.
+                                </p>
+
+                            </div>
+
+                            <div class="post-card-footer">
+
+                                <button
+                                    class="btn btn-secondary view-passdown-btn"
+                                    type="button"
+                                    data-post="inbound">
+                                    View Pass-Down
+                                </button>
+
+                                <button
+                                    class="btn btn-primary acknowledge-btn"
+                                    type="button"
+                                    data-post="inbound">
+                                    Sign Off
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- OUTBOUND -->
+                        <article
+                            class="post-card"
+                            data-post="outbound">
+
+                            <div class="post-card-header">
+
+                                <div class="post-title-group">
+                                    <div class="post-avatar">
+                                        OUT
+                                    </div>
+
+                                    <div>
+                                        <h3>Outbound</h3>
+                                        <span>
+                                            Current Pass-Down
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <span
+                                    class="badge badge-neutral"
+                                    id="outbound-status">
+                                    No Entry
+                                </span>
+
+                            </div>
+
+                            <div
+                                class="post-card-body"
+                                id="outbound-preview">
+
+                                <p class="empty-state">
+                                    No pass-down available.
+                                </p>
+
+                            </div>
+
+                            <div class="post-card-footer">
+
+                                <button
+                                    class="btn btn-secondary view-passdown-btn"
+                                    type="button"
+                                    data-post="outbound">
+                                    View Pass-Down
+                                </button>
+
+                                <button
+                                    class="btn btn-primary acknowledge-btn"
+                                    type="button"
+                                    data-post="outbound">
+                                    Sign Off
+                                </button>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- AP OFFICE -->
+                        <article
+                            class="post-card"
+                            data-post="ap-office">
+
+                            <div class="post-card-header">
+
+                                <div class="post-title-group">
+                                    <div class="post-avatar">
+                                        AP
+                                    </div>
+
+                                    <div>
+                                        <h3>AP Office</h3>
+                                        <span>
+                                            Current Pass-Down
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <span
+                                    class="badge badge-neutral"
+                                    id="ap-office-status">
+                                    No Entry
+                                </span>
+
+                            </div>
+
+                            <div
+                                class="post-card-body"
+                                id="ap-office-preview">
+
+                                <p class="empty-state">
+                                    No pass-down available.
+                                </p>
+
+                            </div>
+
+                            <div class="post-card-footer">
+
+                                <button
+                                    class="btn btn-secondary view-passdown-btn"
+                                    type="button"
+                                    data-post="ap-office">
+                                    View Pass-Down
+                                </button>
+
+                                <button
+                                    class="btn btn-primary acknowledge-btn"
+                                    type="button"
+                                    data-post="ap-office">
+                                    Sign Off
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RECENT PASS-DOWNS -->
+                <section
+                    class="dashboard-section"
+                    id="history">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2>Last 7 Days</h2>
+
+                            <p>
+                                Quickly review recent
+                                pass-downs from all shifts.
+                            </p>
+                        </div>
+
+                        <button
+                            class="btn btn-secondary"
+                            id="view-all-history-btn"
+                            type="button">
+                            View Full History
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table class="data-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Post</th>
+                                    <th>Shift</th>
+                                    <th>Submitted By</th>
+                                    <th>Associate Sign-Off</th>
+                                    <th>Manager Sign-Off</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="recent-passdowns-body">
+
+                                <tr>
+                                    <td
+                                        colspan="7"
+                                        class="empty-table-message">
+                                        No recent pass-downs available.
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- OUTSTANDING TASKS -->
+                <section
+                    class="dashboard-section"
+                    id="tasks">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2>Outstanding Tasks</h2>
+
+                            <p>
+                                Track tasks requiring
+                                attention across shifts.
+                            </p>
+                        </div>
+
+                        <button
+                            class="btn btn-primary"
+                            id="create-task-btn"
+                            type="button">
+                            + Add Task
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table class="data-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Post</th>
+                                    <th>Assigned Shift</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="outstanding-tasks-body">
+
+                                <tr>
+                                    <td
+                                        colspan="6"
+                                        class="empty-table-message">
+                                        No outstanding tasks.
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- PASS-DOWN DETAILS MODAL -->
+    <div
+        class="modal-overlay"
+        id="passdown-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="passdown-modal-title"
+        hidden>
+
+        <div class="modal modal-large">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="passdown-modal-title">
+                        Pass-Down Details
+                    </h2>
+
+                    <p id="passdown-modal-subtitle">
+                        Review shift information.
+                    </p>
+                </div>
+
+                <button
+                    class="modal-close"
+                    type="button"
+                    data-close-modal="passdown-modal"
+                    aria-label="Close">
+                    &times;
+                </button>
+
+            </div>
+
+            <div
+                class="modal-body"
+                id="passdown-modal-content">
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    type="button"
+                    data-close-modal="passdown-modal">
+                    Close
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    id="modal-acknowledge-btn"
+                    type="button">
+                    Sign Off
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACKNOWLEDGMENT MODAL -->
+    <div
+        class="modal-overlay"
+        id="acknowledgment-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="acknowledgment-modal-title"
+        hidden>
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="acknowledgment-modal-title">
+                        Pass-Down Acknowledgment
+                    </h2>
+
+                    <p>
+                        Confirm that you have reviewed
+                        the selected pass-down.
+                    </p>
+                </div>
+
+                <button
+                    class="modal-close"
+                    type="button"
+                    data-close-modal="acknowledgment-modal"
+                    aria-label="Close">
+                    &times;
+                </button>
+
+            </div>
+
+            <form id="acknowledgment-form">
+
+                <div class="modal-body">
+
+                    <input
+                        type="hidden"
+                        id="acknowledgment-passdown-id">
+
+                    <div class="form-group">
+
+                        <label for="acknowledgment-type">
+                            Acknowledgment Type
+                        </label>
+
+                        <select
+                            id="acknowledgment-type"
+                            required>
+
+                            <option value="associate">
+                                Associate
+                            </option>
+
+                            <option value="manager">
+                                Manager
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="acknowledgment-name">
+                            Your Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="acknowledgment-name"
+                            placeholder="Enter your full name"
+                            maxlength="100"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="acknowledgment-shift">
+                            Your Shift
+                        </label>
+
+                        <select
+                            id="acknowledgment-shift"
+                            required>
+
+                            <option value="">
+                                Select Shift
+                            </option>
+
+                            <option value="S1">S1</option>
+                            <option value="S2">S2</option>
+                            <option value="S3">S3</option>
+                            <option value="S4">S4</option>
+                            <option value="S5">S5</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="acknowledgment-notice">
+                        By submitting, you confirm that
+                        you have reviewed the selected
+                        pass-down information.
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        class="btn btn-secondary"
+                        type="button"
+                        data-close-modal="acknowledgment-modal">
+                        Cancel
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+                        type="submit">
+                        Confirm Acknowledgment
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- CREATE PASS-DOWN MODAL -->
+    <div
+        class="modal-overlay"
+        id="create-passdown-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="create-passdown-title"
+        hidden>
+
+        <div class="modal modal-large">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 id="create-passdown-title">
+                        Create New Pass-Down
+                    </h2>
+
+                    <p>
+                        Complete the information
+                        for your assigned post.
+                    </p>
+                </div>
+
+                <button
+                    class="modal-close"
+                    type="button"
+                    data-close-modal="create-passdown-modal"
+                    aria-label="Close">
+                    &times;
+                </button>
+
+            </div>
+
+
+            <form id="create-passdown-form">
+
+                <div class="modal-body">
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="passdown-employee">
+                                APA Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="passdown-employee"
+                                placeholder="Employee name"
+                                maxlength="100"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="passdown-shift">
+                                Shift
+                            </label>
+
+                            <select
+                                id="passdown-shift"
+                                required>
+
+                                <option value="">
+                                    Select Shift
+                                </option>
+
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                                <option value="S4">S4</option>
+                                <option value="S5">S5</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="passdown-post">
+                            Assigned Post
+                        </label>
+
+                        <select
+                            id="passdown-post"
+                            required>
+
+                            <option value="">
+                                Select Post
+                            </option>
+
+                            <option value="core-rover">
+                                CORE Rover
+                            </option>
+
+                            <option value="inbound">
+                                Inbound
+                            </option>
+
+                            <option value="outbound">
+                                Outbound
+                            </option>
+
+                            <option value="ap-office">
+                                AP Office
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="passdown-completed">
+                            Tasks Completed
+                        </label>
+
+                        <textarea
+                            id="passdown-completed"
+                            rows="4"
+                            placeholder="Enter tasks completed during your shift...">
+                        </textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="passdown-handoff">
+                            Tasks Being Handed Off
+                        </label>
+
+                        <textarea
+                            id="passdown-handoff"
+                            rows="4"
+                            placeholder="Enter outstanding tasks for the next shift...">
+                        </textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="passdown-notes">
+                            Additional Notes
+                        </label>
+
+                        <textarea
+                            id="passdown-notes"
+                            rows="4"
+                            placeholder="Enter additional shift information...">
+                        </textarea>
+
+                    </div>
+
+
+                    <!-- POST-SPECIFIC FIELDS -->
+                    <div
+                        id="post-specific-fields"
+                        class="post-specific-fields">
+
+                        <!-- JavaScript will display
+                             additional fields based
+                             on the selected post. -->
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        class="btn btn-secondary"
+                        type="button"
+                        data-close-modal="create-passdown-modal">
+                        Cancel
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+                        type="submit">
+                        Submit Pass-Down
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICATION CONTAINER -->
+    <div
+        id="toast-container"
+        class="toast-container"
+        aria-live="polite">
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>
